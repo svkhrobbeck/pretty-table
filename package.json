@@ -9,7 +9,7 @@
     "lib/**/*"
   ],
   "scripts": {
-    "build": "yarn clean && rollup -c",
+    "build": "yarn clean && rollup -c && rimraf bundle-analysis.html",
     "clean": "rimraf lib",
     "release": "yarn build && changeset publish",
     "prettify": "prettier --write \"{src,tools,public}/**/*.{json,ts,tsx,js,jsx,md,scss,css,html}\""
