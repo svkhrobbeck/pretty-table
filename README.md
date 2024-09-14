@@ -15,12 +15,12 @@ const PrettyTable = require("pretty-table");
 
 const table = new PrettyTable([
   {
-    name: "Jane Doe",
-    age: 29
+    name: "Kurosaki Ichigo",
+    age: 17
   },
   {
-    name: "John Smith",
-    age: 12
+    name: "Sosuke Aizen",
+    age: 34
   }
 ]);
 
