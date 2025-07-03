@@ -13,7 +13,7 @@ or
 ```javascript
 
 // Package supports esm and cjs modules
-import { PrettyTable } from "@svkhrobbeck/pretty-table";
+import PrettyTable from "@svkhrobbeck/pretty-table";
 
 const table = new PrettyTable([
   {
