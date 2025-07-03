@@ -1,6 +1,6 @@
 {
   "name": "@svkhrobbeck/pretty-table",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "outputDir": "./lib",
   "exports": {
     "import": {
