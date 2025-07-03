@@ -4,14 +4,16 @@ A nice little npm package that can print table to the console
 
 ## Installation
 
-`npm i pretty-table`  
+`npm i @/svkhrobbeck/pretty-table`  
 or  
-`yarn add pretty-table`
+`yarn add @/svkhrobbeck/pretty-table`
 
 ## Usage
 
 ```javascript
-const PrettyTable = require("pretty-table");
+
+// Package supports esm and cjs modules
+import { PrettyTable } from "@/svkhrobbeck/pretty-table";
 
 const table = new PrettyTable([
   {
