@@ -1,27 +1,45 @@
 {
-  "name": "@yasudoro/pretty-table",
-  "version": "0.0.0",
-  "type": "module",
+  "name": "pretty-table",
+  "version": "1.0.0",
   "outputDir": "./lib",
-  "types": "lib/index.d.ts",
-  "main": "./lib/index.js",
+  "exports": {
+    "import": {
+      "types": "./lib/esm/index.d.ts",
+      "default": "./lib/esm/index.js"
+    },
+    "require": {
+      "types": "./lib/cjs/index.d.ts",
+      "default": "./lib/cjs/index.js"
+    },
+    "types": "./lib/esm/index.d.ts"
+  },
+  "main": "lib/cjs/index.js",
+  "module": "lib/esm/index.js",
   "files": [
     "lib/**/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": {
+    "name": "Suhrobbek Soatov",
+    "url": "https://soatov.uz",
+    "email": "svkhrobbeck@gmail.com"
+  },
   "scripts": {
-    "build": "yarn clean && rollup -c && rimraf bundle-analysis.html",
+    "build": "yarn clean && rollup -c",
     "clean": "rimraf lib",
-    "release": "yarn build && changeset publish",
+    "typecheck": "tsc --noEmit true",
     "prettify": "prettier --write \"{src,tools,public}/**/*.{json,ts,tsx,js,jsx,md,scss,css,html}\""
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.7",
     "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
+    "@types/lodash": "^4.17.15",
     "autoprefixer": "^10.4.19",
-    "prettier": "^3.3.3",
+    "prettier": "^3.4.2",
     "rimraf": "^6.0.1",
     "rollup": "2.78.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",

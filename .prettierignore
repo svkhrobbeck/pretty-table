@@ -1,5 +1,7 @@
+lib/
+dist/
 build/
 node_modules/
 public/
 package.json
-/bundle-anakysis.html
+/bundle-analysis.html

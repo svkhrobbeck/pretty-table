@@ -1,6 +1,11 @@
 # Ignore everything
 *
 
-# Except the dist folder
-!lib/*
+# Except the lib folder and its contents
+!lib/
 !lib/**
+
+# Allow these specific files
+!.npmignore
+!package.json
+!README.md

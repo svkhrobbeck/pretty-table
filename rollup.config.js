@@ -1,25 +1,29 @@
-import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
-import { terser } from "rollup-plugin-terser";
-import visualizer from "rollup-plugin-visualizer";
-import typescript from "@rollup/plugin-typescript";
 import ts from "typescript";
 import json from "@rollup/plugin-json";
+import { terser } from "rollup-plugin-terser";
+import commonjs from "@rollup/plugin-commonjs";
+import resolve from "@rollup/plugin-node-resolve";
+import typescript from "@rollup/plugin-typescript";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 
-import { getFiles } from "./scripts/buildUtils";
+import { getFiles } from "./scripts/build-utils";
 
 const extensions = [".js", ".ts", ".jsx", ".tsx"];
 
+const inputFiles = ["./src/index.ts", ...getFiles("./src", extensions, [])];
+
+const externalPackages = [];
+const tsExcludeList = ["node_modules", "lib"];
+
 export default [
   {
-    input: ["./src/index.ts", ...getFiles("./src", extensions, [])],
+    input: inputFiles,
     output: [
       {
-        dir: "lib",
-        format: "es",
+        dir: "./lib/esm",
+        format: "esm",
         preserveModules: true,
-        preserveModulesRoot: "lib",
+        preserveModulesRoot: "src",
       },
     ],
     plugins: [
@@ -31,36 +35,41 @@ export default [
         typescript: ts,
         tsconfig: "./tsconfig.build.json",
         declaration: true,
-        declarationDir: "lib",
-        exclude: [
-          "**/*.spec.ts",
-          "**/*.test.ts",
-          "**/*.stories.ts",
-          "**/*.spec.tsx",
-          "**/*.test.tsx",
-          "**/*.stories.tsx",
-          "node_modules",
-          "lib",
-        ],
+        outDir: "lib/esm",
+        declarationDir: "lib/esm",
+        exclude: tsExcludeList,
       }),
       json(),
-      visualizer({
-        filename: "bundle-analysis.html",
-        open: false,
+    ],
+    external: externalPackages,
+  },
+
+  {
+    input: inputFiles,
+    output: [
+      {
+        dir: "./lib/cjs",
+        format: "cjs",
+        preserveModules: true,
+        preserveModulesRoot: "src",
+        exports: "named",
+      },
+    ],
+    plugins: [
+      peerDepsExternal(),
+      resolve(),
+      commonjs(),
+      terser(),
+      typescript({
+        typescript: ts,
+        tsconfig: "./tsconfig.build.json",
+        declaration: true,
+        outDir: "lib/cjs",
+        declarationDir: "lib/cjs",
+        exclude: tsExcludeList,
       }),
+      json(),
     ],
-    external: [
-      "react",
-      "react-dom",
-      "react-i18next",
-      "classnames",
-      "lodash",
-      "antd",
-      "react-qr-code",
-      "react-select",
-      "use-clipboard-copy",
-      "react-paginate",
-      "react-spinners",
-    ],
+    external: externalPackages,
   },
 ];

@@ -4,9 +4,9 @@ A nice little npm package that can print table to the console
 
 ## Installation
 
-`npm i @yasudoro/pretty-table`  
+`npm i pretty-table`  
 or  
-`yarn add @yasudoro/pretty-table`
+`yarn add pretty-table`
 
 ## Usage
 
